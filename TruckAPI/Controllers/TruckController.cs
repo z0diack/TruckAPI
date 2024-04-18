@@ -68,7 +68,7 @@ namespace TruckAPI.Controllers
             return Ok(await _context.Trucks.ToListAsync());
         }
 
-        [HttpDelete]
+        [HttpDelete] //Deltes a truck entry
         public async Task<ActionResult> DeleteTruck(Truck truck)
         {
             var toDelete = await _context.Trucks.FindAsync(truck.Id);
