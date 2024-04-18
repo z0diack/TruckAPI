@@ -1,0 +1,14 @@
+@TruckAPI_HostAddress = https://localhost:7107
+
+GET {{TruckAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
+
+GET {{TruckAPI_HostAddress}}/weatherforecast
+
+###
+
+GET {{TruckAPI_HostAddress}}/api/truck
+
+###
