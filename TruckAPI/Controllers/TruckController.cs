@@ -6,7 +6,7 @@ using TruckAPI.Models;
 
 namespace TruckAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("truck")]
     [ApiController]
     public class TruckController : ControllerBase
     {
@@ -18,7 +18,7 @@ namespace TruckAPI.Controllers
             _context = context;
         }
 
-        [HttpGet] //Get all trucks
+        [HttpGet("/trucks")] //Get all trucks
         public async Task<ActionResult> GetAllTrucks()
         {
             var trucks = await _context.Trucks.ToListAsync();
@@ -69,15 +69,16 @@ namespace TruckAPI.Controllers
         }
 
         [HttpDelete]
-        public async Task<ActionResult> DeleteTruck(Guid id)
+        public async Task<ActionResult> DeleteTruck(Truck truck)
         {
-            var toDelete = await _context.Trucks.FindAsync(id);
+            var toDelete = await _context.Trucks.FindAsync(truck.Id);
             if(toDelete == null)
             {
                 return BadRequest("Entry not found!");
             }
 
             _context.Trucks.Remove(toDelete);
+            await _context.SaveChangesAsync();
 
             return Ok(await _context.Trucks.ToListAsync());
         }
